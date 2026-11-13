@@ -1,10 +1,10 @@
-# Stressful events in the European power system under climate change (v0.2)
+# Stressful events in the European power system under climate change (v0.3)
 
 [![tests](https://github.com/michaelserikov/p12/actions/workflows/tests.yml/badge.svg)](https://github.com/michaelserikov/p12/actions/workflows/tests.yml)
 
 This project starts from stressful periods that the European electricity system has actually lived through in 2015-2025, builds a weather-only stress index that reproduces them, and then asks how such periods change in frequency, duration, severity and spatial extent between the present climate (1995-2014) and the end of the century under SSP3-7.0 (2080-2099). The climate side is [Climate2Energy](https://doi.org/10.1088/2753-3751/ae2870) (C2E): bias-corrected CESM2 converted to country-level wind, solar, heating, cooling and hydro series, three realizations. The net-load set-up follows Bloin-Wibe et al. (2026, ERL, [doi 10.1088/1748-9326/ae5727](https://doi.org/10.1088/1748-9326/ae5727)) and is reproduced first.
 
-v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and present vs future statistics (WP3). v0.2 adds the weather patterns behind the events and their future analogues (WP2), technology trends (WP4) and mitigation options (WP5).
+v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and present vs future statistics (WP3). v0.2 adds the weather patterns behind the events and their future analogues (WP2), technology trends (WP4) and mitigation options (WP5). v0.3 adds the resolution test towards stretched-grid input (WP6), Nordic hydrology and a paper-style report.
 
 ## Main findings (v0.1)
 
@@ -29,7 +29,7 @@ v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and pr
 | balanced (60/40) | +10.3% | +58.0% | +16.0% | -23.8% | -53.2% | -50.6% | -75.1% |
 | high solar (30/70) | -2.6% | +116.8% | +5.3% | -21.8% | -53.2% | -50.2% | -78.2% |
 
-The paper reports about +30% high-net-load events for wind-dominated systems with current heating, mostly in summer and autumn, and about -50% in winter and spring for fully electrified net-zero systems. The reproduction gives the same signs, seasons and orders of magnitude; differences in level are expected, because fleets here are stylised (not TYNDP 2024), demand has no TYNDP scaling and reservoir hydro is left out of net load (it is a mitigation option in v0.2).
+The paper reports about +30% high-net-load events for wind-dominated systems with current heating, mostly in summer and autumn, and about -50% in winter and spring for fully electrified net-zero systems. The reproduction gives the same signs, seasons and orders of magnitude; differences in level are expected, because fleets here are stylised (not TYNDP 2024), demand has no TYNDP scaling and reservoir hydro is left out of net load (it enters the PyPSA runs of v0.2).
 
 **Robustness to the bias-correction member.** C2E ships each realization corrected with the quantile maps of every realization. Across all nine combinations the high-wind, current-heating change is +19.6% to +24.0% (mean +21.7%); the spread from the realization (3.6 points on average) is four times the spread from the calibration member (0.8 points).
 
@@ -95,6 +95,24 @@ Each design operated with fixed capacities on another year:
 ![Climate vs technology](figures/wp4_decomposition.png)
 ![Mitigation](figures/wp5_mitigation.png)
 
+## Main findings (v0.3): resolution, Nordic hydrology and the report
+
+**What does climate-model resolution change? (WP6, towards stretched-grid input for Climate2Energy).** Climate2Energy corrects CESM2 on its own 1.25 x 0.94 degree grid against ERA5 regridded to that grid, so a perfectly corrected CESM2 is ERA5 seen at 1.25 x 0.94 degrees. The test converts the same ERA5 hours twice, at 0.25 degrees and after averaging wind components, temperature and radiation to CESM2-sized boxes, with a C2E-style conversion (129 m hub height, generic low-specific-power curve, sites better than the national median, onshore only). **Available so far: December 2016 only** (the other five months are still in the CDS queue; the script reruns on whatever is on disk):
+- In flat and coastal countries resolution hardly matters: national best-site wind output changes by -2% to +2.5% in Germany, Poland, the Baltic and Nordic countries, Great Britain, Denmark and France, and the hourly correlation between the two grids is 0.985 or higher.
+- **In complex terrain it matters a lot.** Best-site output on the coarse grid is 44% lower in Switzerland, 42% in Slovenia, 37% in North Macedonia, 11-12% in Austria and Romania, and 38% higher in Albania (coarse boxes mix ridges, valleys and sea). The longest low-wind spell (output below 10% for at least 24 hours) grows from 191 to 511 hours in Switzerland and from 94 to 252 hours in Slovenia.
+- Hours with wind output below 10% are more frequent on the coarse grid in 18 of 30 countries (median +5%). PV is unaffected at country level (0.047 on both grids), as expected for a near-linear conversion.
+- The site-selection step drives part of the gap: averaged over all sites, the two grids agree within 1-2% in the median; the coarse grid blurs the best sites. Extending Climate2Energy to stretched-grid simulations therefore changes the answer most where Alpine and Balkan wind or hydro matter, and for event duration more than for event frequency.
+
+**Nordic hydrology with continental stress (stretch item).** Climate2Energy weekly reservoir inflow, September-August inflow years:
+- Mean inflow rises slightly and becomes less variable: Norway 114 to 116 TWh (coefficient of variation 0.14 to 0.11), Sweden 65 to 68 TWh (0.10 to 0.09). Dry years (below the present 20th percentile) fall from 21% to 18% of years in Norway and to 4% in Sweden.
+- A dry inflow year followed by a continental stress winter (top 20% of winters by energy above today's P98, Nordic countries excluded) occurs once in 57 present-day and once in 57 future Norwegian inflow years across the three realizations: no evidence of a compound link, but 19 years per realization cannot exclude one.
+- Observed check: Norwegian reservoir filling in early October (NVE, 1995-2025) against the stress days of the following winter (ERA5 index, today's fleet): Spearman 0.15 (31 winters); the six lowest-filling autumns are followed by 10.2 stress days on average against 10.7 in all winters. In the observed record low Norwegian reservoirs and continental Dunkelflaute winters are independent.
+
+**Report.** A short paper-style write-up of all results is in [report/report.md](report/report.md) (working report, not peer reviewed).
+
+![Resolution test](figures/wp6_resolution.png)
+![Nordic hydrology](figures/v03_nordic_hydro.png)
+
 ## Figures (v0.1)
 
 ![High net load change](figures/wp3_p90_change.png)
@@ -120,7 +138,7 @@ Each design operated with fixed capacities on another year:
 
 ```
 python -m venv .venv && .venv/Scripts/pip install -r requirements.txt && .venv/Scripts/pip install -e . --no-deps
-python scripts/run_all.py v0.2
+python scripts/run_all.py v0.3
 pytest -q
 ```
 Data sources, licences and checksums: [DATA.md](DATA.md), `data_manifest.csv`. Download scripts are in `download/`.

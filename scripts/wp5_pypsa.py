@@ -91,7 +91,8 @@ def main():
                              "backup_GW": cap[cap.index.str.endswith("backup")].sum() / 1000,
                              "solve_s": time.time() - t0})
                 print(rows[-1], flush=True)
-    pd.DataFrame(rows).to_csv(OUT / "pypsa_designs.csv", index=False)
+    tag = "" if reals == "A" else f"_{reals}"
+    pd.DataFrame(rows).to_csv(OUT / f"pypsa_designs{tag}.csv", index=False)
     # cross-operation: each design on every other year (fixed capacities)
     cross = []
     pairs = []
@@ -111,7 +112,7 @@ def main():
             cross.append({"design": "_".join(kd), "operated_on": "_".join(kw), "lost_load_GWh": shed / 1000,
                           "backup_TWh": backup / 1e6, "operating_cost_bn": n.objective / 1e9})
     cr = pd.DataFrame(cross)
-    cr.to_csv(OUT / "pypsa_cross_operation.csv", index=False)
+    cr.to_csv(OUT / f"pypsa_cross_operation{tag}.csv", index=False)
     print(cr.round(2).to_string())
 
 
