@@ -1,2 +1,2 @@
 window,wind_mean_fine,wind_mean_coarse,wind_mean_allsites_fine,wind_mean_allsites_coarse,wind_std_fine,wind_std_coarse,wind_corr,hours_below_10pct_fine,hours_below_10pct_coarse,lowwind_events_24h_fine,lowwind_events_24h_coarse,longest_lowwind_h_fine,longest_lowwind_h_coarse,pv_mean_fine,pv_mean_coarse
-DJF 2016/17,0.36867273,0.3506885,0.23215953,0.23450121,0.2625190317630768,0.26197853684425354,0.9948778352276741,127.0,136.5,2.0,2.0,47.0,51.5,0.04669017,0.04657489
+DJF 2016/17,0.36626545,0.35502458,0.25156635,0.2444292,0.26728956401348114,0.2589842230081558,0.9934352103616173,275.5,311.5,4.0,4.0,51.5,58.0,0.05587084,0.055664398
