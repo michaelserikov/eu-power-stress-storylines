@@ -1,10 +1,10 @@
-# Stressful events in the European power system under climate change (v0.1)
+# Stressful events in the European power system under climate change (v0.2)
 
 [![tests](https://github.com/michaelserikov/p12/actions/workflows/tests.yml/badge.svg)](https://github.com/michaelserikov/p12/actions/workflows/tests.yml)
 
 This project starts from stressful periods that the European electricity system has actually lived through in 2015-2025, builds a weather-only stress index that reproduces them, and then asks how such periods change in frequency, duration, severity and spatial extent between the present climate (1995-2014) and the end of the century under SSP3-7.0 (2080-2099). The climate side is [Climate2Energy](https://doi.org/10.1088/2753-3751/ae2870) (C2E): bias-corrected CESM2 converted to country-level wind, solar, heating, cooling and hydro series, three realizations. The net-load set-up follows Bloin-Wibe et al. (2026, ERL, [doi 10.1088/1748-9326/ae5727](https://doi.org/10.1088/1748-9326/ae5727)) and is reproduced first.
 
-v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and present vs future statistics (WP3).
+v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and present vs future statistics (WP3). v0.2 adds the weather patterns behind the events and their future analogues (WP2), technology trends (WP4) and mitigation options (WP5).
 
 ## Main findings (v0.1)
 
@@ -36,6 +36,42 @@ The paper reports about +30% high-net-load events for wind-dominated systems wit
 - European aggregate events above the joint 98th percentile with current heating are short (mean 2-3 hours, evening peaks); the storage-relevant measure is the annual maximum 7-day mean net load, which falls slightly for the balanced fleet (178 to 164 GW mean over realizations) but rises for the high-wind fleet in all three realizations (161-171 to 169-174 GW).
 - Fully electrified heating (C2E scaling, which gives European peaks near 1.3 TW and reads as resistive-equivalent) dominates every statistic it enters; its 20-year return level of event severity drops by an order of magnitude in the future climate. Treat those absolute numbers as an upper bound; v0.2 adds a heat-pump variant.
 
+## Main findings (v0.2): weather patterns, technology and mitigation
+
+**Weather patterns (WP2).** Four winter (November-March) regimes from ERA5 daily mean sea level pressure 1990-2025 (EOFs, k-means):
+- On the top-3% days of the stress index, **Scandinavian blocking is 1.8 times more frequent** than on an average winter day (90% interval from resampling whole winters 1.5-2.2) and NAO- 1.5 times (1.1-1.9); NAO+ almost never coincides with stress (0.09). The stress-day composite correlates -0.92 with the NAO+ pattern.
+- No trend in the winter frequency of Scandinavian blocking 1990-2025 (Kendall tau -0.04, p 0.71).
+- The November 2024 Dunkelflaute is a blocking situation (pattern correlation 0.78); December 2024 and January 2017 sit closer to an Atlantic ridge extending into Europe (0.55 and 0.31).
+- **Analogues in the future climate.** Climate2Energy holds no pressure fields, so analogues are searched on what the pressure pattern does to the system: the 3-day pattern of standardized wind, PV and temperature-driven demand anomalies across 32 countries, each dataset standardized against its own present climate. Days as close to each named event as the closest 1% of present-day days occur **about half as often under SSP3-7.0** (9.2 per decade in 1995-2014 against 3.8-4.8 in 2080-2099, mean of three realizations; realization range 2.5-7.0). They do not all become milder: for the December 2024 analogue, the mean European net load on analogue days rises from 153 to 176 GW, and the share of analogue days above today's 98th percentile from 0.37 to 0.67 (realization range 0.50-0.90). The same configuration becomes rarer, but when it happens it is more often a stress event.
+
+**Technology trends (WP4).** European net load with a balanced net-zero fleet resized to each case's demand; stress = hours above today's 98th percentile (today's firm capacity); 2x2 decomposition with the interaction kept explicit (mean of three realizations):
+
+| Case | climate effect (h/yr) | technology effect | interaction | total change |
+|---|---|---|---|---|
+| air conditioning x2 | +24 | +11 | +54 | +89 |
+| air conditioning x3 | +24 | +23 | **+121** | +168 |
+| heat pumps 50% | +24 | +548 | -261 | +311 |
+| heat pumps 100% | +24 | +1112 | -430 | +706 |
+| EV, uncontrolled charging | +24 | +778 | +36 | +837 |
+| EV, smart charging | +24 | +275 | +80 | +379 |
+| combined (HP 50%, AC x2, EV smart) | +24 | +913 | -126 | +811 |
+
+- With today's technology the climate signal is +24 stress hours a year (+14%). **Air conditioning amplifies it**: alone, tripled AC adds 23 hours, but in the future climate it adds 121 more; in summer the interaction (99 h) is larger than either effect alone. Heat pumps go the other way: warmer winters remove a large part of the stress they would add today.
+- Charging behaviour of electric vehicles matters more than the climate signal: uncontrolled charging adds about three times the stress hours of smart charging.
+- Electric heating with C2E's full-electrification scaling is shown in `results/wp4` but treated as an upper bound; the heat-pump variant divides it by a COP falling from 3.5 to 2.0 at the cold peak (an assumption, stated in the script).
+
+**Mitigation (WP5).** Balanced and high-wind net-zero fleets, current heating:
+- **Pooling is the strongest lever.** Energy above each country's own 98th-percentile firm capacity: 5.6-6.1 TWh a year if every country covers itself, 0.7-1.0 TWh with four regional pools and below 0.1 TWh on a European copper plate; the sum of national peaks exceeds the European peak by about 100 GW (498 vs 400 GW present, balanced fleet). This upper bound ignores grid limits; the PyPSA runs below have them.
+- **Storage.** To hold European net load at today's 95th percentile, storage needs about 2.4 TWh (about 14 hours at the needed power) in the present climate and 2.1 TWh in 2080-2099 for the balanced fleet, but the future range across realizations is much wider (1.1-3.4 TWh against 2.2-2.5): internal variability, not the forced signal, sets the storage risk. The high-wind fleet needs more and longer storage (4.3 TWh, 25 hours present; 3.7 TWh, 23 hours future).
+- **Firm backup**: European net-load peaks fall slightly (400 to 387 GW balanced, 371 to 363 GW high wind); the 99.9th percentile changes by less than 5 GW.
+- **Demand flexibility**: moving 5% of each day's demand within the day lowers the European peak from 413 to 337 GW (realization A, present), 10% to 301 GW.
+
+![Regimes and composites](figures/wp2_composites_regimes.png)
+![Climate vs technology](figures/wp4_decomposition.png)
+![Mitigation](figures/wp5_mitigation.png)
+
+## Figures (v0.1)
+
 ![High net load change](figures/wp3_p90_change.png)
 ![Country change](figures/wp3_country_change.png)
 ![Real events](figures/wp1_real_events.png)
@@ -59,7 +95,7 @@ The paper reports about +30% high-net-load events for wind-dominated systems wit
 
 ```
 python -m venv .venv && .venv/Scripts/pip install -r requirements.txt && .venv/Scripts/pip install -e . --no-deps
-python scripts/run_all.py v0.1
+python scripts/run_all.py v0.2
 pytest -q
 ```
 Data sources, licences and checksums: [DATA.md](DATA.md), `data_manifest.csv`. Download scripts are in `download/`.

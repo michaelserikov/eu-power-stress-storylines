@@ -1,0 +1,13 @@
+fleet,period,flex_share,peak_GW
+balanced,historical,0.0,412.9720153808594
+balanced,historical,0.05,337.1014099121094
+balanced,historical,0.1,300.8865661621094
+balanced,SSP370,0.0,384.6936950683594
+balanced,SSP370,0.05,314.6096496582031
+balanced,SSP370,0.1,283.19451904296875
+high_wind,historical,0.0,384.0288391113281
+high_wind,historical,0.05,315.8294982910156
+high_wind,historical,0.1,296.7528076171875
+high_wind,SSP370,0.0,361.6350402832031
+high_wind,SSP370,0.05,293.23797607421875
+high_wind,SSP370,0.1,276.06451416015625
