@@ -1,0 +1,8 @@
+,value
+corr_index_vs_observed_residual_load_anomaly,0.9081400492015502
+spearman,0.9022409252914387
+index_vs_rl_days,"{'observed_days': 120, 'predicted_days': 84, 'hit_rate': np.float64(0.717), 'false_alarm_ratio': np.float64(0.131)}"
+index_vs_eu_price_days_winter,"{'observed_days': 45, 'predicted_days': 84, 'hit_rate': np.float64(0.444), 'false_alarm_ratio': np.float64(0.726)}"
+random_hit_rate_price_winter_mean,0.11944444444444445
+random_hit_rate_price_winter_p95,0.2222222222222222
+spearman_index_vs_median_price_ratio_winter,0.7997849978621505
