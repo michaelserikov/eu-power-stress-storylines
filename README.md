@@ -31,6 +31,8 @@ v0.1 covers reproducibility (WP0), real events and the stress index (WP1) and pr
 
 The paper reports about +30% high-net-load events for wind-dominated systems with current heating, mostly in summer and autumn, and about -50% in winter and spring for fully electrified net-zero systems. The reproduction gives the same signs, seasons and orders of magnitude; differences in level are expected, because fleets here are stylised (not TYNDP 2024), demand has no TYNDP scaling and reservoir hydro is left out of net load (it is a mitigation option in v0.2).
 
+**Robustness to the bias-correction member.** C2E ships each realization corrected with the quantile maps of every realization. Across all nine combinations the high-wind, current-heating change is +19.6% to +24.0% (mean +21.7%); the spread from the realization (3.6 points on average) is four times the spread from the calibration member (0.8 points).
+
 **Present vs future events (WP3).**
 - Country level, balanced fleet, hours above each country's own 98th percentile: a clear north-south split. Italy **+121%** (signal-to-noise 8.6), Austria +70%, Croatia +32%, Spain +26% and Greece +25% gain stress hours; Sweden, Latvia, Estonia, France and Finland lose 36-40%. The sign is the same in all three realizations wherever |signal/noise| exceeds 2.
 - Dunkelflaute (daily VRE output below the country's present 3rd percentile for at least 2 days) becomes more frequent in **Great Britain (+72%), Ireland (+68%) and Norway (+47%)**, with signal-to-noise above 2 and the same sign in all three realizations, and less frequent in most continental countries.
