@@ -1,6 +1,6 @@
 # Stressful events in the European power system under climate change (v0.1)
 
-[![tests](https://github.com/michaelserikov/eu-stress-events/actions/workflows/tests.yml/badge.svg)](https://github.com/michaelserikov/eu-stress-events/actions/workflows/tests.yml)
+[![tests](https://github.com/michaelserikov/p12/actions/workflows/tests.yml/badge.svg)](https://github.com/michaelserikov/p12/actions/workflows/tests.yml)
 
 This project starts from stressful periods that the European electricity system has actually lived through in 2015-2025, builds a weather-only stress index that reproduces them, and then asks how such periods change in frequency, duration, severity and spatial extent between the present climate (1995-2014) and the end of the century under SSP3-7.0 (2080-2099). The climate side is [Climate2Energy](https://doi.org/10.1088/2753-3751/ae2870) (C2E): bias-corrected CESM2 converted to country-level wind, solar, heating, cooling and hydro series, three realizations. The net-load set-up follows Bloin-Wibe et al. (2026, ERL, [doi 10.1088/1748-9326/ae5727](https://doi.org/10.1088/1748-9326/ae5727)) and is reproduced first.
 
