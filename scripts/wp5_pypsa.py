@@ -5,7 +5,7 @@ limits, existing nuclear and hydro, extendable wind, PV, batteries, hydrogen sto
 8000 EUR/MWh) from github.com/michaelserikov/eu-weather-years-pypsa (same author), imported from its source folder
 (WEATHERYEARS_SRC). Here it is driven by Climate2Energy weather instead of renewables.ninja: C2E wind (onshore,
 offshore) and PV capacity factors, and demand = baseline + C2E heating + cooling (current electrification).
-For realizations A, B, C and both periods: the stress year (highest 7-day mean net load of the 12 countries for a
+For realization A (B and C with WP5_REALS=ABC) and both periods: the stress year (highest 7-day mean net load of the 12 countries for a
 balanced fleet) and a normal year (median of the annual 7-day maxima). Each design is then operated with fixed
 capacities on the other designs' years: lost load and backup energy show what a design misses.
 6-hour steps (the source repo checked 6 h against 3 h). Costs: PyPSA technology-data 2030 as in the source repo. Illustrative system, not a plan.
@@ -68,7 +68,7 @@ def main():
     limits = inputs.transfer_limits()
     existing = inputs.existing_fleet()
     designs, rows = {}, []
-    reals = os.environ.get("WP5_REALS", "ABC")
+    reals = os.environ.get("WP5_REALS", "A")  # about 30 min per design on a laptop; ABC for all realizations
     for r in reals:
         for p in PERIODS:
             eu = nl[("balanced", r, p)][ZONES].sum(axis=1)

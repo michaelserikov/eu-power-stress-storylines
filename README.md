@@ -69,6 +69,28 @@ The paper reports about +30% high-net-load events for wind-dominated systems wit
 - **Firm backup**: European net-load peaks fall slightly (400 to 387 GW balanced, 371 to 363 GW high wind); the 99.9th percentile changes by less than 5 GW.
 - **Demand flexibility**: moving 5% of each day's demand within the day lowers the European peak from 413 to 337 GW (realization A, present), 10% to 301 GW.
 
+**Capacity expansion on stress vs normal years (WP5, PyPSA).** The 12-country model of [eu-weather-years-pypsa](https://github.com/michaelserikov/eu-weather-years-pypsa) (transport model with AC and HVDC limits, existing nuclear and hydro, extendable wind, PV, batteries, hydrogen and backup, load shedding at 8000 EUR/MWh, 6-hour steps), driven by Climate2Energy realization A. The stress year has the highest 7-day net load of a fixed balanced fleet, the normal year sits at the median:
+
+| Design year | system cost (bn EUR/yr) | onshore wind (GW) | PV (GW) | battery (GWh) | backup (GW) |
+|---|---|---|---|---|---|
+| present, stress (1997) | 51.5 | 201 | 205 | 0 | 66 |
+| present, normal (1998) | 52.3 | 188 | 222 | 0 | 97 |
+| future, stress (2088) | **57.0** | 197 | 245 | 31 | 82 |
+| future, normal (2081) | 50.2 | 197 | 190 | 4 | 61 |
+
+Each design operated with fixed capacities on another year:
+
+| Design | operated on | lost load (GWh) | backup energy (TWh) |
+|---|---|---|---|
+| present normal | present stress year | 37 | 40.6 |
+| future normal | future stress year | **3,325** | 89.8 |
+| present stress | future stress year | **1,760** | 73.9 |
+| future stress | present stress year | 13 | 27.0 |
+
+- In the present climate the year that stresses a fixed fleet is not the year that drives the optimal design (the normal year is even slightly costlier): today's stress is absorbed by backup. Under SSP3-7.0 the stress year costs 13% more to design for than a normal year and adds batteries.
+- **A system sized on today's worst year loses 1.8 TWh of load in a future stress year**; one sized on a normal future year loses 3.3 TWh. The reverse direction is harmless (13 GWh). In this model, planning on present-day stress years is not conservative for the end of the century.
+- Offshore wind and hydrogen storage stay at zero in all four designs with these costs. One realization and one year per design: an illustration of the mechanism, not a system plan.
+
 ![Regimes and composites](figures/wp2_composites_regimes.png)
 ![Climate vs technology](figures/wp4_decomposition.png)
 ![Mitigation](figures/wp5_mitigation.png)
