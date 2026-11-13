@@ -89,7 +89,24 @@ Each design operated with fixed capacities on another year:
 
 - In the present climate the year that stresses a fixed fleet is not the year that drives the optimal design (the normal year is even slightly costlier): today's stress is absorbed by backup. Under SSP3-7.0 the stress year costs 13% more to design for than a normal year and adds batteries.
 - **A system sized on today's worst year loses 1.8 TWh of load in a future stress year**; one sized on a normal future year loses 3.3 TWh. The reverse direction is harmless (13 GWh). In this model, planning on present-day stress years is not conservative for the end of the century.
-- Offshore wind and hydrogen storage stay at zero in all four designs with these costs. One realization and one year per design: an illustration of the mechanism, not a system plan.
+- Offshore wind and hydrogen storage stay at zero in all four designs with these costs. One year per design: an illustration of the mechanism, not a system plan.
+
+**Robustness across realizations (B and C, same set-up).** Lost load in GWh for each cross-operation, realizations A / B / C:
+
+| Design | operated on | A | B | C |
+|---|---|---|---|---|
+| present normal | present stress year | 37 | 3,697 | 518 |
+| future normal | future stress year | 3,325 | 2,662 | 2,024 |
+| present stress | future stress year | 1,760 | 829 | 969 |
+| future stress | present stress year | 13 | 254 | 0 |
+
+| Design year | cost A | cost B | cost C (bn EUR/yr) |
+|---|---|---|---|
+| present stress / normal | 51.5 / 52.3 | 57.4 / 47.9 | 51.0 / 55.0 |
+| future stress / normal | 57.0 / 50.2 | 53.4 / 47.8 | 55.1 / 51.0 |
+
+- **Robust in all three realizations:** a system sized on today's stress year loses 0.8-1.8 TWh of load in a future stress year, while the future stress design runs the present stress year with at most 0.25 TWh; designing for the future stress year costs 4-7 bn EUR a year (8-13%) more than for a normal future year.
+- **Not robust:** in the present climate the cost difference between stress and normal design years changes sign between realizations (-4.0 to +9.5 bn EUR a year), and how much load a normal-year design loses in a stress year ranges from 37 to 3,697 GWh. Today's stress years differ more between realizations than future ones.
 
 ![Regimes and composites](figures/wp2_composites_regimes.png)
 ![Climate vs technology](figures/wp4_decomposition.png)
